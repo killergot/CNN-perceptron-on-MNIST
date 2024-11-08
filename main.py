@@ -149,6 +149,25 @@ def save_trained_model(model, model_path):
 # save_trained_model(model, model_path)
 
 
+y_pred = model.predict(x_test)
+y_pred_classes = np.argmax(y_pred, axis=1) 
+y_true = np.argmax(y_test, axis=1)        
+
+conf_matrix = confusion_matrix(y_true, y_pred_classes)
+
+print("Матрица путаницы:")
+print(conf_matrix)
+
+plt.figure(figsize=(10, 7))
+plt.imshow(conf_matrix, interpolation='nearest', cmap=plt.cm.Blues)
+plt.title('Матрица путаницы')
+plt.colorbar()
+tick_marks = np.arange(10)
+plt.xticks(tick_marks, range(10))
+plt.yticks(tick_marks, range(10))
+plt.xlabel('Предсказанные классы')
+plt.ylabel('Истинные классы')
+plt.show()
 
 
 
